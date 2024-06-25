@@ -64,7 +64,7 @@ def nextitem():
     global var
     var = var + 1
     f.seek(var)
- try:
+    try:
         c=f.readlines()
         xyz = c[var]
         v = list(xyz.split(" "))
@@ -145,6 +145,83 @@ def updateitem():
             else:
                 working.write('{0} {1} {2} {3} {4}'.format(str(e1), e2, e3, str(e4), e5))
     os.remove(r"database_proj")
-    #brought to you by code-projects.org
     os.rename(r"database_proj1", r"database_proj")
+
+
+def searchitem():
+    i=0
+    e11 = entry1.get()
+    with open(r"database_proj") as working:
+        for line in working:
+            i=i+1
+            if str(e11) in line:
+                break
+        try:
+            v = list(line.split(" "))
+            entry1.delete(0, END)
+            entry2.delete(0, END)
+            entry3.delete(0, END)
+            entry4.delete(0, END)
+            entry5.delete(0, END)
+            entry1.insert(0, str(v[0]))
+            entry2.insert(0, str(v[1]))
+            entry3.insert(0, str(v[2]))
+            entry4.insert(0, str(v[3]))
+            entry5.insert(0, str(v[4]))
+        except:
+            messagebox.showinfo("Title", "error end of file")
+    working.close()
+
+
+def clearitem():
+    entry1.delete(0, END)
+    entry2.delete(0, END)
+    entry3.delete(0, END)
+    entry4.delete(0, END)
+    entry5.delete(0, END)
+
+label0 = Label(root, text="PHARMACY MANAGEMENT SYSTEM", bg="blue", fg="yellow", font=("Helvetica", 30))
+label1 = Label(root, text="ITEM NAME", bg="green", relief="ridge", fg="black", font=("Helvetica", 12), width=25)
+entry1 = Entry(root, font=("Helvetica", 12))
+label2 = Label(root, text="ITEM PRICE", bd="2", relief="ridge", height="1", bg="green", fg="black", font=("Helvetica", 12), width=25)
+entry2 = Entry(root, font=("Helvetica", 12))
+label3 = Label(root, text="ITEM QUANTITY", bd="2", relief="ridge", bg="green", fg="black", font=("Helvetica", 12), width=25)
+entry3 = Entry(root, font=("Helvetica", 12))
+label4 = Label(root, text="ITEM CATEGORY", bd="2", relief="ridge", bg="green", fg="black", font=("Helvetica", 12), width=25)
+entry4 = Entry(root, font=("Helvetica", 12))
+label5 = Label(root, text="ITEM DISCOUNT", bg="green", relief="ridge", fg="black", font=("Helvetica", 12), width=25)
+entry5 = Entry(root, font=("Helvetica", 12))
+button1 = Button(root, text="ADD", bg="black", fg="white", width=20, font=("Helvetica", 12), command=additem)
+button2 = Button(root, text="DELETE", bg="black", fg="white", width=20, font=("Helvetica", 12), command=deleteitem)
+button3 = Button(root, text="FIRST", bg="black", fg="white", width=20, font=("Helvetica", 12), command=firstitem)
+button4 = Button(root, text="NEXT", bg="black", fg="white", width=20, font=("Helvetica", 12), command=nextitem)
+button5 = Button(root, text="PREVIOUS", bg="black", fg="white", width=20, font=("Helvetica", 12), command=previousitem)
+button6 = Button(root, text="LAST", bg="black", fg="white", width=20, font=("Helvetica", 12), command=lastitem)
+button7 = Button(root, text="UPDATE", bg="black", fg="white", width=20, font=("Helvetica", 12), command=updateitem)
+button8 = Button(root, text="SEARCH", bg="black", fg="white", width=20, font=("Helvetica", 12), command=searchitem)
+button9 = Button(root, text="CLEAR", bg="black", fg="white", width=20, font=("Helvetica", 12), command=clearitem)
+
+label0.grid(columnspan=6, padx=10, pady=10)
+label1.grid(row=1, column=0, sticky=W, padx=10, pady=10)
+label2.grid(row=2, column=0, sticky=W, padx=10, pady=10)
+label3.grid(row=3, column=0, sticky=W, padx=10, pady=10)
+label4.grid(row=4, column=0, sticky=W, padx=10, pady=10)
+label5.grid(row=5, column=0, sticky=W, padx=10, pady=10)
+entry1.grid(row=1, column=1, padx=40, pady=10)
+entry2.grid(row=2, column=1, padx=10, pady=10)
+entry3.grid(row=3, column=1, padx=10, pady=10)
+entry4.grid(row=4, column=1, padx=10, pady=10)
+entry5.grid(row=5, column=1, padx=10, pady=10)
+button1.grid(row=1, column=4, padx=40, pady=10)
+button2.grid(row=1, column=5, padx=40, pady=10)
+button3.grid(row=2, column=4, padx=40, pady=10)
+button4.grid(row=2, column=5, padx=40, pady=10)
+button5.grid(row=3, column=4, padx=40, pady=10)
+button6.grid(row=3, column=5, padx=40, pady=10)
+button7.grid(row=4, column=4, padx=40, pady=10)
+button8.grid(row=4, column=5, padx=40, pady=10)
+button9.grid(row=5, column=5, padx=40, pady=10)
+
+root.mainloop()
+
 
